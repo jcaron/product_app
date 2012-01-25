@@ -2,7 +2,8 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.xml
   def index
-    @categories = Category.all
+    @title = "Category Index"
+    @categories = Category.find(:all, :order => 'name')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
+    @title = @category.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new.xml
   def new
     @category = Category.new
+    @title = "New category"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +38,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
+    @title = "Edit #{@category.name}"
   end
 
   # POST /categories
@@ -44,11 +48,14 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to(@category, :notice => 'Category was successfully created.') }
-        format.xml  { render :xml => @category, :status => :created, :location => @category }
+        format.html { redirect_to(@category, :notice => 
+          'Category was successfully created.') }
+        format.xml  { render :xml => @category, :status => :created, 
+          :location => @category }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @category.errors, :status => 
+          :unprocessable_entity }
       end
     end
   end

@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ProductApp</title>
-  <%= stylesheet_link_tag :all %>
+  <title><%= title %></title>
+  <%= render "layouts/stylesheets" %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="container">
+    <%= render "layouts/header" %><br />
+    <section class="round">
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, :class => "flash #{key}") %>
+      <% end %>
+      <%= yield %>
+    </section>
+    <%= render "layouts/footer" %>
+    <%= debug(params) if Rails.env.development? %>  </div>
 </body>
 </html>
