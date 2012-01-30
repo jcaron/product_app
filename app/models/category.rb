@@ -4,6 +4,8 @@ class Category < ActiveRecord::Base
   has_many :sub_categories, :dependent => :destroy
 
   validates :name, :presence => true, :length => { :maximum => 50 }
+
+  default_scope :order => 'categories.name'
 end
 
 # == Schema Information

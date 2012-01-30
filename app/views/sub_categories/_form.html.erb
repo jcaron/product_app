@@ -13,8 +13,7 @@
 
   <div class="field">
     <%= f.label :category %>
-    <%= f.collection_select :category_id, @categories, :id, 
-      :name %>
+    <%= f.collection_select :category_id, Category.all, :id, :name %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
