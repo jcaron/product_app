@@ -2,9 +2,11 @@ require 'spec_helper'
 
 describe PagesController do
 
+  render_views
+
   describe "GET 'home'" do
     before(:each) do
-      get 'home'
+      get :home
     end
 
     it "returns http success" do
@@ -18,7 +20,7 @@ describe PagesController do
 
   describe "GET 'about'" do
     before(:each) do
-      get 'about'
+      get :about
     end
 
     it "returns http success" do
@@ -32,7 +34,7 @@ describe PagesController do
 
   describe "GET 'help'" do
     before(:each) do
-      get 'help'
+      get :help
     end
 
     it "returns http success" do
@@ -46,7 +48,7 @@ describe PagesController do
 
   describe "GET 'new'" do
     before(:each) do
-      get 'new'
+      get :new
     end
 
     it "returns http success" do

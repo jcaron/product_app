@@ -10,6 +10,11 @@
   <%= @category.description %>
 </p>
 
-
+<p>
+  <b>Sub-Categories:</b>
+  <% unless @category.sub_categories.empty? %>
+    <ul><%= render @sub_categories %></ul>
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>

@@ -5,4 +5,5 @@ ProductApp::Application.routes.draw do
   match '/new', :to => "pages#new"
 
   resources :categories
+  resources :sub_categories
 end

@@ -1,6 +1,36 @@
 require 'spec_helper'
 
 describe Category do
+  before(:each) do
+    @category = Factory(:category)
+    @sub_category = @category.sub_categories.create!(:name => "Power Tube")
+  end
+
+  describe "sub-categories association" do
+    it "should have a sub_categories attribute" do
+      @category.should respond_to(:sub_categories)
+    end
+
+    it "should have the right sub-category in sub_categories" do
+      @category.sub_categories.should == [@sub_category]
+    end
+
+    it "should destroy the sub_categories if their category is destroyed" do
+      @category.destroy
+      SubCategory.find_by_id(@sub_category.id).should be_nil
+    end
+  end
+
+  describe "validations" do
+    it "should require a non-blank name" do
+      Category.new(:name => "").should_not be_valid
+    end
+
+    it "should reject long names" do
+      long_name = 'a' * 51
+      Category.new(:name => long_name).should_not be_valid
+    end
+  end
 end
 
 # == Schema Information

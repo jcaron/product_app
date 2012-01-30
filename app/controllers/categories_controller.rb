@@ -15,6 +15,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
+    @sub_categories = @category.sub_categories
     @title = @category.name
 
     respond_to do |format|
