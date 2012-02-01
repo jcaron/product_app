@@ -6,6 +6,10 @@ Factory.define :sub_category do |sub_category|
   sub_category.name "Power Tube"
 end
 
+Factory.define :product do |product|
+  product.name "x12"
+end
+
 Factory.sequence :name do |n|
   "Tube #{n}"
 end

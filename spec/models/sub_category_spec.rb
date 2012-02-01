@@ -1,13 +1,10 @@
 require 'spec_helper'
 
 describe SubCategory do
-  before(:each) do
-    @category = Factory(:category)
-    @attr = { :name => "Power Tube" }
-  end
-
   describe "category associations" do
     before(:each) do
+      @category = Factory(:category)
+      @attr = { :name => "Power Tube" }
       @sub_category = @category.sub_categories.create!(@attr)
     end
 
@@ -18,6 +15,26 @@ describe SubCategory do
     it "should have the right associated category" do
       @sub_category.category_id.should == @category.id
       @sub_category.category.should == @category
+    end
+  end
+    
+  describe "product associations" do
+    before(:each) do
+      @category = Factory(:category)
+      @attr = { :name => "Power Tube" }
+      @sub_category = @category.sub_categories.create!(@attr)
+      @product = Factory(:product)
+      productb = Factory(:product, :name => Factory.next(:name))
+      @relationship = @product.relationships.create!(
+        :sub_category_id => @sub_category.id)
+    end
+
+    it "should have a products attribute" do
+      @sub_category.should respond_to(:products)
+    end
+      
+    it "should have the right products and no others" do
+        @sub_category.products.should == [@product]
     end
   end
 
@@ -53,7 +70,6 @@ describe SubCategory do
       sub_category = @category.sub_categories.build(:name => @name)
       sub_category.should_not be_valid
     end
-
   end
 end
 

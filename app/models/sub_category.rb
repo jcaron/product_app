@@ -4,7 +4,7 @@ class SubCategory < ActiveRecord::Base
   belongs_to :category
   has_many :relationships, :foreign_key => "sub_category_id", 
     :dependent => :destroy
-  has_many :products, :through => :relationships
+    has_many :products, :through => :relationships, :source => :product
 
   validates :name, :presence => true, :length => { :maximum => 50 }
   validates :category_id, :presence => true

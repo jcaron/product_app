@@ -6,4 +6,11 @@ class Relationship < ActiveRecord::Base
 
   validates :sub_category_id, :presence => true
   validates :product_id, :presence => true
+
+  after_destroy :destroy_lone_products
+
+  private
+    def destroy_lone_products
+      product.destroy if product.sub_categories.empty?
+    end
 end
