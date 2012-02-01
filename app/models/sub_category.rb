@@ -2,6 +2,9 @@ class SubCategory < ActiveRecord::Base
   attr_accessible :name, :description
 
   belongs_to :category
+  has_many :relationships, :foreign_key => "sub_category_id", 
+    :dependent => :destroy
+  has_many :products, :through => :relationships
 
   validates :name, :presence => true, :length => { :maximum => 50 }
   validates :category_id, :presence => true
