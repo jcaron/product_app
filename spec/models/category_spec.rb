@@ -21,6 +21,22 @@ describe Category do
     end
   end
 
+  describe "product associations" do
+    before(:each) do
+      @product = Product.create!(:name => "x")
+      Factory(:product)
+      @product.relationships.create!(:sub_category_id => @sub_category.id)
+    end
+
+    it "should have a products attribute" do
+      @category.should respond_to(:products)
+    end
+    
+    it "should have the right products and no others" do
+      @category.products.should == [@product]
+    end
+  end
+
   describe "validations" do
     it "should require a non-blank name" do
       Category.new(:name => "").should_not be_valid

@@ -12,20 +12,37 @@ describe Product do
             @product = Product.create!(@attr)
             @relationship = @product.relationships.create!(
               :sub_category_id => @sub_category.id)
+            @sub_category_2 = Factory(:sub_category, :name => "null",
+                :category_id => @category.id)
         end
         
         it "should have a sub_categories attribute" do
             @product.should respond_to(:sub_categories)
         end
         
+        it "should respond to add_sub_category!" do
+            @product.should respond_to(:add_sub_category!)
+        end
+
+        it "should respond to has_sub_category?" do
+            @product.should respond_to(:has_sub_category?)
+        end
+        
         it "should have the right sub-categories and no others" do
             @product.sub_categories.should == [@sub_category]
+        end
+        
+        it "should not create a relationship to a different category" do
+            category = Factory(:category, :name => Factory.next(:name))
+            sub_cat = Factory(:sub_category, :category_id => category.id)
+            lambda do
+                @product.add_sub_category!(sub_cat)
+            end.should_not change(Relationship, :count)
         end
 
         describe 'dependance' do
             before(:each) do
-                @relationship2 = @product.relationships.create!(
-                    :sub_category_id => @sub_category.id)
+                @relationship2 = @product.add_sub_category! @sub_category_2
                 @relationship.destroy
             end
             

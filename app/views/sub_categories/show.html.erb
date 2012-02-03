@@ -15,5 +15,12 @@
   <%= link_to @sub_category.category.name, 
     category_path(@sub_category.category) %>
 </p>
+
+<p>
+  <b>Products:</b>
+  <% @sub_category.products.each do |product| %>
+    <%= link_to product.name, product %>
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_sub_category_path(@sub_category) %> |
 <%= link_to 'Back', sub_categories_path %>

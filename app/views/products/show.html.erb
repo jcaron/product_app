@@ -10,6 +10,18 @@
   <%= @product.description %>
 </p>
 
+<% unless @product.category_id.nil? %>
+  <p>
+    <b>Category:</b>
+    <%= link_to @category.name, @category %>
+  </p>
+
+  <p>
+    <b>Sub-Categories:</b>
+    <%= render @product.sub_categories %>
+  </p>
+<% end %>
+
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
   # GET /products.xml
   def index
     @products = Product.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @products }
@@ -14,7 +13,8 @@ class ProductsController < ApplicationController
   # GET /products/1.xml
   def show
     @product = Product.find(params[:id])
-
+    @category = Category.find(@product.category_id) unless 
+      @product.category_id.nil?
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @product }
@@ -25,7 +25,6 @@ class ProductsController < ApplicationController
   # GET /products/new.xml
   def new
     @product = Product.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @product }
@@ -41,7 +40,6 @@ class ProductsController < ApplicationController
   # POST /products.xml
   def create
     @product = Product.new(params[:product])
-
     respond_to do |format|
       if @product.save
         format.html { redirect_to(@product, :notice => 'Product was successfully created.') }
@@ -57,7 +55,6 @@ class ProductsController < ApplicationController
   # PUT /products/1.xml
   def update
     @product = Product.find(params[:id])
-
     respond_to do |format|
       if @product.update_attributes(params[:product])
         format.html { redirect_to(@product, :notice => 'Product was successfully updated.') }
@@ -74,7 +71,6 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-
     respond_to do |format|
       format.html { redirect_to(products_url) }
       format.xml  { head :ok }
