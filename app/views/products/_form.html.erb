@@ -15,10 +15,20 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </div>
+
+  <div class="field">
+    <%= f.label :category %><br />
+    <%= f.collection_select :category_id, Category.all, :id, :name,
+      :include_blank => true %>
+  </div>
+
+  <div class="field sub_categories"></div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

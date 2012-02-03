@@ -6,6 +6,9 @@ class Product < ActiveRecord::Base
     :dependent => :destroy
   has_many :sub_categories, :through => :relationships,
     :source => :sub_category
+  accepts_nested_attributes_for :sub_categories
+
+  default_scope :order => 'products.name'
 
   validates :name, :presence => true, :length => { :maximum => 50 }
 
@@ -15,11 +18,15 @@ class Product < ActiveRecord::Base
 
   def add_sub_category!(sub_category)
     unless has_sub_category?(sub_category)
-      self.relationships.create!(:sub_category_id => sub_category.id)
+      begin
+        self.relationships.create!(:sub_category_id => sub_category.id)
+      rescue ActiveRecord::RecordNotSaved
+        logger.info "Failed to save relationship record, invalid input"
+      end
     end
   end
 
   def set_category(id)
-    self.category_id = id if self.category_id.nil?
+    self.category_id = id
   end
 end

@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @sub_category.name %>
-</p>
+<h1>Sub-category: <%= @sub_category.name %></h1>
 
 <p>
   <b>Description:</b>
@@ -18,9 +15,7 @@
 
 <p>
   <b>Products:</b>
-  <% @sub_category.products.each do |product| %>
-    <%= link_to product.name, product %>
-  <% end %>
+  <%= render @sub_category.products %>
 </p>
 <%= link_to 'Edit', edit_sub_category_path(@sub_category) %> |
 <%= link_to 'Back', sub_categories_path %>

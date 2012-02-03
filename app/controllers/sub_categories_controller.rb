@@ -4,7 +4,6 @@ class SubCategoriesController < ApplicationController
   def index
     @sub_categories = SubCategory.all
     @title = "Sub-categories index"
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sub_categories }
@@ -27,7 +26,6 @@ class SubCategoriesController < ApplicationController
   def new
     @sub_category = SubCategory.new
     @title = "New sub-category"
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @sub_category }
@@ -44,7 +42,7 @@ class SubCategoriesController < ApplicationController
   # POST /sub_categories
   # POST /sub_categories.xml
   def create
-    if(params[:sub_category][:category_id].nil?)
+    if(params[:sub_category][:category_id].blank?)
       redirect_to new_sub_category_path
     else
       category = Category.find(params[:sub_category][:category_id])

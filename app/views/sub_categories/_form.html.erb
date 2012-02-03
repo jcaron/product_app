@@ -13,7 +13,8 @@
 
   <div class="field">
     <%= f.label :category %>
-    <%= f.collection_select :category_id, Category.all, :id, :name %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, 
+      :include_blank => true %>
   </div>
   <div class="field">
     <%= f.label :name %><br />

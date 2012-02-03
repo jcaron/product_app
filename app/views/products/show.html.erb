@@ -1,9 +1,5 @@
+<h1>Product: <%= @product.name %></h1>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @product.name %>
-</p>
 
 <p>
   <b>Description:</b>
@@ -18,7 +14,7 @@
 
   <p>
     <b>Sub-Categories:</b>
-    <%= render @product.sub_categories %>
+    <ul><%= render @product.sub_categories %></ul>
   </p>
 <% end %>
 
