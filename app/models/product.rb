@@ -1,4 +1,5 @@
 class Product < ActiveRecord::Base
+  attr_accessor :sub_category_id
   attr_accessible :name, :description
 
   belongs_to :category

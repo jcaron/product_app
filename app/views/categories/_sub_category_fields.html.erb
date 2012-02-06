@@ -1,0 +1,10 @@
+Sub-category
+<div class="field">
+  <%= f.label :name, "Name" %><br \>
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :description, "Description" %><br />
+  <%= f.text_area :description, :rows => 3 %>
+</div>
+<p><%= f.link_to_remove "Remove this Sub-category" %></p>

@@ -1,0 +1,27 @@
+var sub_categories = new Array();
+<% @sub_categories.each do |sub_category| -%>
+  sub_categories.push(new Array(<%= sub_category.category_id %>, '<%= sub_category.name %>', <%= sub_category.id %>));
+<% end -%>
+
+function subCategorySelected() {
+  category_id = $('#product_category_id').val();
+  var options = $('#product_sub_category_id').options;
+  alert(options);
+  options.length = 1;
+  $.each(function(sub_category) {
+    if (sub_category[0] == cagegory_id) {
+      options[options.length] = new Option(sub_category[1], sub_category[2]);
+    }
+  });
+  if (options.length == 1) {
+    $('sub_category_field').hide();
+  } else {
+    $('sub_category_field').show();
+  }
+  alert(options);
+}
+
+$(document).ready(function() {
+  subCategorySelected();
+  $('#product_category_id').bind('change', subCategorySelected);
+});

@@ -1,0 +1,8 @@
+$(document).ready(function() {
+  $("#product_category_id").change(function() {
+    <% @selected_category = capture do -%>
+      $("#product_category_id").val();
+    <% end %>
+    alert('<%= @selected_category %>');
+  });
+});

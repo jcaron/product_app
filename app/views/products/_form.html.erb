@@ -1,3 +1,4 @@
+<% javascript 'dynamic_sub_categories' %>
 <%= form_for(@product) do |f| %>
   <% if @product.errors.any? %>
     <div id="error_explanation">
@@ -18,7 +19,7 @@
 
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.text_area :description, :rows => 3 %>
   </div>
 
   <div class="field">
@@ -27,7 +28,11 @@
       :include_blank => true %>
   </div>
 
-  <div class="field sub_categories"></div>
+  <div class="field">
+    <%= f.label :sub_category %><br />
+    <%= f.collection_select :sub_category_id, SubCategory.all, :id, :name,
+      :include_blank => true %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

@@ -1,4 +1,4 @@
-<%= form_for(@category) do |f| %>
+<%= nested_form_for @category do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this 
@@ -17,8 +17,13 @@
   </div>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :rows => 3 %>
   </div>
+
+  <% f.fields_for :sub_categories do |builder| %>
+    <%= render 'sub_category_fields', :f => builder %>
+  <% end %>
+  <p><%= f.link_to_add "Add a Sub-category", :sub_categories %></p>
   <div class="actions">
     <%= f.submit %>
   </div>

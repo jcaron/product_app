@@ -1,8 +1,10 @@
 class Category < ActiveRecord::Base
-  attr_accessible :name, :description
+  attr_accessible :name, :description, :sub_categories_attributes
 
   has_many :sub_categories, :dependent => :destroy
   has_many :products
+
+  accepts_nested_attributes_for :sub_categories, :allow_destroy => true
 
   validates :name, :presence => true, :length => { :maximum => 50 }
 
