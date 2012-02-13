@@ -36,7 +36,7 @@ describe Product do
             category = Factory(:category, :name => Factory.next(:name))
             sub_cat = Factory(:sub_category, :category_id => category.id)
             lambda do
-                @product.add_sub_category!(sub_cat)
+                @product.add_sub_category!(sub_cat.id)
             end.should_not change(Relationship, :count)
         end
 

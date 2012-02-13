@@ -1,4 +1,3 @@
-<% javascript 'dynamic_sub_categories' %>
 <%= form_for(@product) do |f| %>
   <% if @product.errors.any? %>
     <div id="error_explanation">
@@ -25,13 +24,27 @@
   <div class="field">
     <%= f.label :category %><br />
     <%= f.collection_select :category_id, Category.all, :id, :name,
-      :include_blank => true %>
+      { :include_blank => true }, :class => 'category_chosen' %>
   </div>
 
   <div class="field">
     <%= f.label :sub_category %><br />
-    <%= f.collection_select :sub_category_id, SubCategory.all, :id, :name,
-      :include_blank => true %>
+    <select name="product[sub_category_id][]" id="product_sub_category_id" multiple="true">
+      <% product_sub_categories = @product.sub_categories.map{ |sub| sub.id } %>
+      <% SubCategory.all.each do |subcategory| %>
+        <% if product_sub_categories.include? subcategory.id %>
+          <option value="<%= subcategory.id %>" rel="<%= 
+           subcategory.category.id %>" selected="selected">
+            <%= subcategory.name %>
+          </option>
+        <% else %>
+          <option value="<%= subcategory.id %>" rel="<%= 
+           subcategory.category.id %>">
+            <%= subcategory.name %>
+          </option>
+        <% end %>
+      <% end %>
+    </select>
   </div>
 
   <div class="actions">

@@ -8,7 +8,7 @@ class SubCategory < ActiveRecord::Base
 
   validates :name, :presence => true, :length => { :maximum => 50 }
   validates :category_id, :presence => true
-  validates_uniqueness_of :name, :scope => :category_id
+  validates_uniqueness_of :name, :scope => :category_id, :case_sensitive => false
 
   default_scope :order => 'sub_categories.name'
 end

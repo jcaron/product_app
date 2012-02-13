@@ -1,10 +1,6 @@
-function remove_fields(link) {
-  $(link).prev("input[type=hidden]").val("1");
-  $(link).closest(".fields").hide();
-}
-
-function add_fields(link, association, content) {
-  var new_id = new Date().getTime();
-  var regexp = new RegExp("new_" + association, "g");
-  $(link).parent().before(content.replace(regexp, new_id));
-}
+$(document).ready(function() {
+  //if there are these single select boxes on the page, use chosen on them
+  $(".category_chosen").each(function() {
+    $(this).data("placeholder", "Select category").chosen();
+  });
+});

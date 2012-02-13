@@ -45,7 +45,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(params[:product])
     respond_to do |format|
-      if @product.save
+      if !params[:product][:sub_category_id].nil? && @product.save
+        params[:product][:sub_category_id].each do |id|
+          @product.relationships.create(:sub_category_id => id)
+        end
         format.html { redirect_to(@product, :notice => 'Product was successfully created.') }
         format.xml  { render :xml => @product, :status => :created, :location => @product }
       else
@@ -59,6 +62,26 @@ class ProductsController < ApplicationController
   # PUT /products/1.xml
   def update
     @product = Product.find(params[:id])
+    unless params[:product][:sub_category_id].nil?
+      current_sub = @product.sub_categories.map{ |sub| "#{sub.id}" }
+      # will need to add any relationships that don't exist yet
+      add_sub = params[:product][:sub_category_id] - current_sub
+      # will need to remove any relationships that are no longer selected
+      remove_sub = current_sub - params[:product][:sub_category_id]
+      # need to reset the product's category id just in case it has changed that
+      @product.set_category params[:product][:category_id].to_i
+      @product.save
+      add_sub.each do |id|
+        # add each new sub-category
+        @product.add_sub_category!(id.to_i)
+      end
+      remove_sub.each do |id|
+        # remove the relationships to the removed sub categories
+        bad_id = Relationship.where(:product_id => @product.id, 
+          :sub_category_id => id).first
+        bad_id.destroy
+      end
+    end
     respond_to do |format|
       if @product.update_attributes(params[:product])
         format.html { redirect_to(@product, :notice => 'Product was successfully updated.') }

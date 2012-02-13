@@ -7,6 +7,7 @@ class Category < ActiveRecord::Base
   accepts_nested_attributes_for :sub_categories, :allow_destroy => true
 
   validates :name, :presence => true, :length => { :maximum => 50 }
+  validates_uniqueness_of :name, :case_sensitive => false
 
   default_scope :order => 'categories.name'
 end

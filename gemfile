@@ -7,6 +7,7 @@ gem 'nested_form'
 
 group :development do
 	gem 'rspec-rails'
+	gem 'ruby-debug19', :require => 'ruby-debug'
 	gem 'annotate'
 end
 
