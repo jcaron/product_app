@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(params[:product])
     respond_to do |format|
-      if !params[:product][:sub_category_id].nil? && @product.save
+      if @product.save
         params[:product][:sub_category_id].each do |id|
           @product.relationships.create(:sub_category_id => id)
         end

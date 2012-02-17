@@ -20,7 +20,7 @@
     <%= f.text_area :description, :rows => 3 %>
   </div>
 
-  <% f.fields_for :sub_categories do |builder| %>
+  <%= f.fields_for :sub_categories do |builder| %>
     <%= render 'sub_category_fields', :f => builder %>
   <% end %>
   <p><%= f.link_to_add "Add a Sub-category", :sub_categories %></p>

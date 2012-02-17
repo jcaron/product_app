@@ -1,11 +1,31 @@
 require 'spec_helper'
 
 describe "SubCategories" do
-  describe "GET /sub_categories" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get sub_categories_path
-      response.status.should be(200)
+  describe "New" do
+    describe "failure" do
+      it 'should not make a new sub-category' do
+        lambda do
+          visit new_sub_category_path
+          fill_in "Name", :with => ''
+          click_button
+          response.should render_template('sub_categories/new')
+          response.should have_selector("div#error_explanation")
+        end.should_not change(SubCategory, :count)
+      end
+    end
+
+    describe "success" do
+      before(:each) do
+        @category = Factory(:category)
+      end
+
+      it "should create a new sub-category" #do
+#        lambda do
+ #         visit new_sub_category_path
+  #        fill_in "Name", :with => 'Sub-category'
+   #       
+    #    end.should change(SubCategory, :count).by(1)
+     # end
     end
   end
 end

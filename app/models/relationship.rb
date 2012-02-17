@@ -16,11 +16,20 @@ class Relationship < ActiveRecord::Base
     end
     
     def check_product_category
-      if product.category_id.nil?
-        product.set_category sub_category.category_id
-        product.save
-      elsif product.category_id != sub_category.category_id
+      if product.category_id != sub_category.category_id
         return false
       end
     end
 end
+
+# == Schema Information
+#
+# Table name: relationships
+#
+#  id              :integer         not null, primary key
+#  sub_category_id :integer
+#  product_id      :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+

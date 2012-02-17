@@ -7,13 +7,17 @@ class Product < ActiveRecord::Base
     :dependent => :destroy
   has_many :sub_categories, :through => :relationships,
     :source => :sub_category
+  has_many :line_items
   accepts_nested_attributes_for :sub_categories
 
   default_scope :order => 'products.name'
 
   validates :name, :presence => true, :length => { :maximum => 50 }
   validates_uniqueness_of :name, :scope => :category_id, :case_sensitive => false
-    
+  validates :category_id, :presence => true
+  validates :sub_category_id, :presence => true
+#  validates_numericality_of :unit_price, :greater_than_or_equal_to => 0  
+
   def has_sub_category?(sub_category)
     self.relationships.find_by_sub_category_id(sub_category)
   end
@@ -32,3 +36,16 @@ class Product < ActiveRecord::Base
     self.category_id = id
   end
 end
+
+# == Schema Information
+#
+# Table name: products
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  category_id :integer
+#
+

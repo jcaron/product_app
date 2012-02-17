@@ -4,7 +4,8 @@ describe Product do
     before(:each) do
         @category = Factory(:category)
         @sub_category = Factory(:sub_category, :category_id => @category.id)
-        @attr = { :name => "xyzzy" }
+        @attr = { :name => "xyzzy", :category_id => @category.id, 
+          :sub_category_id => [@sub_category.id] }
     end
 
     describe "sub-category associations" do
@@ -75,3 +76,16 @@ describe Product do
         end
     end
 end
+
+# == Schema Information
+#
+# Table name: products
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  category_id :integer
+#
+

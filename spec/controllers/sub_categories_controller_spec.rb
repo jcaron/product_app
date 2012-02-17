@@ -126,9 +126,9 @@ describe SubCategoriesController do
         end.should_not change(SubCategory, :count)
       end
  
-      it "redirects to the 'new' template if no category" do
+      it "re-renders to the 'new' template if no category" do
         post :create, :sub_category => @attr
-        response.should redirect_to new_sub_category_path
+        response.should render_template('new')
       end
 
       it "re-renders the 'new' template if no name" do

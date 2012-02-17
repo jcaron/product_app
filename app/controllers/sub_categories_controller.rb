@@ -42,24 +42,25 @@ class SubCategoriesController < ApplicationController
   # POST /sub_categories
   # POST /sub_categories.xml
   def create
+    @sub_category
     if(params[:sub_category][:category_id].blank?)
-      redirect_to new_sub_category_path
+      @sub_category = SubCategory.new(:name => params[:sub_category][:name])
     else
       category = Category.find(params[:sub_category][:category_id])
       params[:sub_category].delete(:category_id)
       @sub_category = category.sub_categories.build(params[:sub_category])
-
-      respond_to do |format|
-        if @sub_category.save
-          format.html { redirect_to(@sub_category, 
-            :notice => 'Sub category was successfully created.') }
-          format.xml  { render :xml => @sub_category, :status => :created, 
-            :location => @sub_category }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @sub_category.errors, 
-            :status => :unprocessable_entity }
-        end
+    end
+                                      
+    respond_to do |format|
+      if @sub_category.save
+        format.html { redirect_to(@sub_category, 
+          :notice => 'Sub category was successfully created.') }
+        format.xml  { render :xml => @sub_category, :status => :created, 
+          :location => @sub_category }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @sub_category.errors, 
+          :status => :unprocessable_entity }
       end
     end
   end

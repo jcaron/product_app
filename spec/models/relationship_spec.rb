@@ -4,7 +4,8 @@ describe Relationship do
     before(:each) do
         category = Factory(:category)
         @sub_category = Factory(:sub_category, :category_id => category.id)
-        @product = Factory(:product)
+        @product = Factory(:product, :category_id => category.id, 
+          :sub_category_id => @sub_category.id)
         @relationship = @product.relationships.build(
             :sub_category_id => @sub_category.id)
     end
@@ -41,3 +42,15 @@ describe Relationship do
         end
     end
 end
+
+# == Schema Information
+#
+# Table name: relationships
+#
+#  id              :integer         not null, primary key
+#  sub_category_id :integer
+#  product_id      :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+

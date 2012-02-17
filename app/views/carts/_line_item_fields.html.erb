@@ -1,0 +1,12 @@
+<div class="field">
+  <%= f.label :product_id %><br />
+  <%= f.collection_select :product_id, Product.all, :id, :name, 
+    { :include_blank => true }, :class => "product_chosen" %>
+</div>
+<div class="field">
+  <%= f.label :quantity %><br />
+  <%= f.text_field :quantity %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>

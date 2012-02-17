@@ -9,7 +9,7 @@ describe ProductsController do
   # Product. As you add validations to Product, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { :name => "something", :sub_category_id => ["1"] }
+    { :name => "something", :category_id => 1, :sub_category_id => ["1"] }
   end
   
   # This should return the minimal set of values that should be in the session

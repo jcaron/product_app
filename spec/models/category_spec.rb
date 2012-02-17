@@ -23,8 +23,10 @@ describe Category do
 
   describe "product associations" do
     before(:each) do
-      @product = Product.create!(:name => "x")
-      Factory(:product)
+      @product = Product.create!(:name => "x", :category_id => @category.id, 
+        :sub_category_id => @sub_category.id)
+        Factory(:product, :sub_category_id => @sub_category.id + 1, 
+          :category_id => @category.id + 1)
       @product.relationships.create!(:sub_category_id => @sub_category.id)
     end
 

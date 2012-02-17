@@ -23,8 +23,10 @@ describe SubCategory do
       @category = Factory(:category)
       @attr = { :name => "Power Tube" }
       @sub_category = @category.sub_categories.create!(@attr)
-      @product = Factory(:product)
-      productb = Factory(:product, :name => Factory.next(:name))
+        @product = Factory(:product, :category_id => @category.id, 
+                           :sub_category_id => [@sub_category.id])
+      productb = Factory(:product, :name => Factory.next(:name), 
+        :category_id => @category.id, :sub_category_id => @sub_category.id + 1)
       @relationship = @product.relationships.create!(
         :sub_category_id => @sub_category.id)
     end

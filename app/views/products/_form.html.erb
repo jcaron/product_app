@@ -22,6 +22,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :unit_price %>
+    <%= f.number_field :unit_price %>
+  </div>
+
+  <div class="field">
     <%= f.label :category %><br />
     <%= f.collection_select :category_id, Category.all, :id, :name,
       { :include_blank => true }, :class => 'category_chosen' %>
