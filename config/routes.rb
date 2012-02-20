@@ -10,7 +10,9 @@ ProductApp::Application.routes.draw do
   match '/about', :to => "pages#about"
   match '/new', :to => "pages#new"
   match '/cart', :to => "carts#show"
+  match '/edit_cart', :to => "carts#edit"
   resources :categories
   resources :sub_categories
   resources :relationships, :only => [:create, :destroy]
+  resources :carts, :only => [:create, :destroy]
 end

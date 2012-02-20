@@ -3,6 +3,10 @@
 <p><%= render 'cart_form' %></p>
 
 <p>
+  <b>Price:</b>
+  <%= number_to_currency(@product.unit_price) %>
+</p>
+<p>
   <b>Description:</b>
   <%= @product.description %>
 </p>

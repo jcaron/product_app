@@ -1,8 +1,9 @@
 <% @current_cart ||= current_cart %>
 <section class='round'>
-  <div class="cart_count"><%= pluralize @current_cart.total_items_in_cart, 
-    'item' %> in the cart</div><br />
-  <div class="cart_cost">Current cost (-tax): $<%= @current_cart.total_price %>
-  </div><br />
+  <p><span class="cart_count"><%= pluralize @current_cart.total_items_in_cart, 
+    'item' %></span> in the cart</p>
+  <p>Current cost (-tax): <span class="cart_cost">
+    <%= number_to_currency(@current_cart.total_price) %>
+  </span></p>
   <%= link_to "View your cart", '/cart' %>
 </section>

@@ -10,7 +10,7 @@ class LineItemsController < ApplicationController
       if @line_item.save
         format.html { redirect_to(@product, 
           :notice => 'Product added to cart.') }
-        format.xml
+        format.js
       else
         format.html { redirect_to(@product, 
          :notice => 'A error occured, this product was not added to the cart.')}

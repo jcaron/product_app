@@ -1,10 +1,16 @@
+<h1>Shopping cart</h1>
 <p id="notice"><%= notice %></p>
 <% @cart = current_cart %>
-<p>
-  <b>Order:</b>
-  <%= @cart.order_id %>
-</p>
 
+<table border=1>
+  <tr>
+    <th>Product</th>
+    <th>Unit Price</th>
+    <th>Quantity</th>
+    <th>Total Price</th>
+  </tr>
+  <%= render @cart.line_items %>
+</table>
 
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
+<%= link_to 'Edit', edit_cart_path %> |
 <%= link_to 'Back', carts_path %>

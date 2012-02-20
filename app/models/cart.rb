@@ -6,14 +6,28 @@ class Cart < ActiveRecord::Base
 #  has_one :shipping_address
   accepts_nested_attributes_for :line_items
 
+  after_save :check_items
+
   def total_price
-    # to_a converts line items to a array so the sum is not done on the database
-    Array(line_items).sum(&:full_price)
-#.inject { |sum, n| sum + n.full_price } || 0
+    answer = 0
+    line_items.each do |item|
+      answer += item.full_price
+    end
+    answer
   end
 
   def total_items_in_cart
-    Array(line_items).sum(&:quantity)
-#.inject { |sum, n| sum + n.quantity } || 0
+    answer = 0
+    line_items.each do |item|
+      answer += item.quantity
+    end
+    answer
   end
+
+  private
+    def check_items
+      line_items.each do |item|
+        item.destroy if item.quantity == 0
+      end
+    end
 end

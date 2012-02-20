@@ -5,6 +5,7 @@ class LineItem < ActiveRecord::Base
 
   validates_presence_of :product_id
   validates_presence_of :cart_id
+  validates_numericality_of :quantity, :greater_than_or_equal_to => 0
 
   def unit_price
     product.unit_price

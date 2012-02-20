@@ -2,28 +2,16 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.xml
   def show
-#    @cart = Cart.find(params[:id])
-
+    @title = "Cart"
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @cart }
     end
   end
 
-  # GET /carts/new
-  # GET /carts/new.xml
-  def new
-    @cart = Cart.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @cart }
-    end
-  end
-
   # GET /carts/1/edit
   def edit
-    @cart = Cart.find(params[:id])
+    @title = "Edit cart"
   end
 
   # POST /carts
@@ -45,7 +33,7 @@ class CartsController < ApplicationController
   # PUT /carts/1
   # PUT /carts/1.xml
   def update
-    @cart = Cart.find(params[:id])
+    @cart = Cart.find(params[:cart][:id])
 
     respond_to do |format|
       if @cart.update_attributes(params[:cart])

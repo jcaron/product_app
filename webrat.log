@@ -344,3 +344,8 @@ REQUESTING PAGE: GET /new with {} and HTTP headers {"HTTP_REFERER"=>"/"}
 REQUESTING PAGE: GET /products/new with {} and HTTP headers {}
 REQUESTING PAGE: GET /sub_categories/new with {} and HTTP headers {}
 REQUESTING PAGE: POST /sub_categories with {"utf8"=>"\xE2\x9C\x93", "sub_category"=>{"category_id"=>"", "name"=>"", "description"=>""}, "commit"=>"Create Sub category"} and HTTP headers {"HTTP_REFERER"=>"/sub_categories/new"}
+REQUESTING PAGE: GET /categories/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /categories/new with {} and HTTP headers {}
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+REQUESTING PAGE: GET /products/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /sub_categories/new with {} and HTTP headers {}

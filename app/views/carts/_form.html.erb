@@ -1,4 +1,5 @@
-<%= form_for(@cart) do |f| %>
+<% @cart = current_cart %>
+<%= nested_form_for(@cart) do |f| %>
   <% if @cart.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@cart.errors.count, "error") %> prohibited this cart from being saved:</h2>
@@ -11,11 +12,20 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :id, :value => @cart.id %>
+
+  <table border=1>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+    <tr>
+  </table>
+
   <%= f.fields_for :line_items do |builder| %>
-    <%= render 'line_item_fields', :f => bulder %>
+    <%= render 'line_item_fields', :f => builder %>
   <% end %>
 
-  <p><%= f.link_to_add "Add a product", :line_items %></p>
+  <%= f.link_to_add "Add a product", :line_items %>
 
   <div class="actions">
     <%= f.submit %>
