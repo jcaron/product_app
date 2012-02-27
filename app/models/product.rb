@@ -11,7 +11,7 @@ class Product < ActiveRecord::Base
   has_many :line_items, :dependent => :destroy
   accepts_nested_attributes_for :sub_categories
 
-  default_scope :order => 'products.name'
+  default_scope :order => 'name asc'
 
   validates :name, :presence => true, :length => { :maximum => 50 }
   validates_uniqueness_of :name, :scope => :category_id, :case_sensitive => false
@@ -38,6 +38,7 @@ class Product < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: products
@@ -48,5 +49,6 @@ end
 #  created_at  :datetime
 #  updated_at  :datetime
 #  category_id :integer
+#  unit_price  :decimal(, )     default(0.0)
 #
 

@@ -1,10 +1,10 @@
-<table><tr>
+<tr>
   <td class="field">
     <%= f.collection_select :product_id, Product.all, :id, :name, 
-      { :include_blank => true }, :class => "product_chosen" %>
+      :include_blank => true %>
   </td>
   <td class="field">
     <%= f.number_field :quantity %>
   </td>
   <td><%= f.link_to_remove "remove" %></td>
-</tr></table>
+</tr>

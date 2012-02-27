@@ -19,13 +19,11 @@
       <th>Product</th>
       <th>Quantity</th>
     <tr>
+    <%= f.fields_for :line_items do |builder| %>
+      <%= render 'line_item_fields', :f => builder %>
+    <% end %>
+    <%= f.link_to_add "Add a product", :line_items %>
   </table>
-
-  <%= f.fields_for :line_items do |builder| %>
-    <%= render 'line_item_fields', :f => builder %>
-  <% end %>
-
-  <%= f.link_to_add "Add a product", :line_items %>
 
   <div class="actions">
     <%= f.submit %>

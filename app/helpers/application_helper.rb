@@ -13,7 +13,17 @@ module ApplicationHelper
   end
 
   def current_cart
-    session[:cart_id] ||= Cart.create!.id
+    if user_signed_in?
+      user = current_user
+      if user.cart.nil?
+        user.build_cart
+        user.cart.save
+        user.save
+      end
+      @current_cart = user.cart
+    else
+      session[:cart_id] ||= Cart.create!.id
+    end
     @current_cart ||= Cart.find_or_create_by_id(session[:cart_id])
   end
 end

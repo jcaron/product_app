@@ -1,7 +1,10 @@
 class Cart < ActiveRecord::Base
-  has_many :line_items
-#  has_one :order
+  attr_accessible :line_items_attributes
+  has_many :line_items, :dependent => :destroy
   has_many :products, :through => :line_items
+
+  belongs_to :user
+#  has_one :order
 #  has_one :order_detail
 #  has_one :shipping_address
   accepts_nested_attributes_for :line_items
@@ -24,6 +27,22 @@ class Cart < ActiveRecord::Base
     answer
   end
 
+=begin
+  def current_cart
+    if user_signed_in?
+      user = current_user
+      if user.cart.nil?
+        user.cart.create()
+        user.save
+      end
+      @current_cart = user.cart
+    else
+      session[:cart_id] ||= Cart.create!.id
+    end
+    @current_cart ||= Cart.find_or_create_by_id(session[:cart_id])
+  end
+=end
+
   private
     def check_items
       line_items.each do |item|
@@ -31,3 +50,15 @@ class Cart < ActiveRecord::Base
       end
     end
 end
+
+# == Schema Information
+#
+# Table name: carts
+#
+#  id         :integer         not null, primary key
+#  order_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  user_id    :integer
+#
+

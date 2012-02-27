@@ -20,7 +20,7 @@ describe "Products" do
     end
 
     describe "success" do
-      it 'should make a new product with the correct sub-categories'
+#      it 'should make a new product with the correct sub-categories'
     end
   end
 end

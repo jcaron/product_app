@@ -1,7 +1,8 @@
 class CartsController < ApplicationController
-  # GET /carts/1
-  # GET /carts/1.xml
+  # GET /carts
+  # GET /carts.xml
   def show
+    @cart = Cart.find_by_id(session[:cart_id])
     @title = "Cart"
     respond_to do |format|
       format.html # show.html.erb
@@ -11,6 +12,7 @@ class CartsController < ApplicationController
 
   # GET /carts/1/edit
   def edit
+    @cart = Cart.find_by_id(session[:cart_id])
     @title = "Edit cart"
   end
 
@@ -34,10 +36,11 @@ class CartsController < ApplicationController
   # PUT /carts/1.xml
   def update
     @cart = Cart.find(params[:cart][:id])
+    params[:cart][:id] = nil
 
     respond_to do |format|
       if @cart.update_attributes(params[:cart])
-        format.html { redirect_to(@cart, :notice => 'Cart was successfully updated.') }
+        format.html { redirect_to(cart_path, :notice => 'Cart was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

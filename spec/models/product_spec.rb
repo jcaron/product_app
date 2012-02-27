@@ -5,7 +5,7 @@ describe Product do
         @category = Factory(:category)
         @sub_category = Factory(:sub_category, :category_id => @category.id)
         @attr = { :name => "xyzzy", :category_id => @category.id, 
-          :sub_category_id => [@sub_category.id] }
+            :sub_category_id => [@sub_category.id] , :price => 0}
     end
 
     describe "sub-category associations" do
@@ -27,6 +27,10 @@ describe Product do
 
         it "should respond to has_sub_category?" do
             @product.should respond_to(:has_sub_category?)
+        end
+        
+        it "should respond to set_category" do
+            @product.should respond_to(:set_category)
         end
         
         it "should have the right sub-categories and no others" do
@@ -69,13 +73,30 @@ describe Product do
             product.should_not be_valid
         end
         
+        it "should require the name to be unique in its category" do
+            Product.create! @attr
+            product = Product.new @attr
+            product.should_not be_valid
+        end
+        
         it "should reject a long name" do
             name = 'a'*51
             product = Product.new(@attr.merge(:name => name))
             product.should_not be_valid
         end
+        
+        it "should require a numerical price" do
+            product = Product.new(@attr.merge(:unit_price => 'zebra'))
+            product.should_not be_valid
+        end
+        
+        it "should require a non-negative price" do
+            product = Product.new(@attr.merge(:unit_price => -1))
+            product.should_not be_valid
+        end
     end
 end
+
 
 # == Schema Information
 #
@@ -87,5 +108,6 @@ end
 #  created_at  :datetime
 #  updated_at  :datetime
 #  category_id :integer
+#  unit_price  :decimal(, )     default(0.0)
 #
 

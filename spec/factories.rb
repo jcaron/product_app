@@ -13,3 +13,9 @@ end
 Factory.define :product do |product|
   product.name "x12"
 end
+
+Factory.define :user do |user|
+  user.email 'josh@gmail.com'
+  user.password 'swordfish'
+  user.password_confirmation 'swordfish'
+end

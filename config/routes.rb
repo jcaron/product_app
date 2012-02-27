@@ -1,4 +1,6 @@
 ProductApp::Application.routes.draw do
+  devise_for :users
+
   resources :carts
 
   resources :line_items

@@ -12,8 +12,8 @@ class LineItemsController < ApplicationController
           :notice => 'Product added to cart.') }
         format.js
       else
-        format.html { redirect_to(@product, 
-         :notice => 'A error occured, this product was not added to the cart.')}
+        format.html { redirect_to(root_path, 
+         :notice => 'A error occured, the product was not added to the cart.')}
       end
     end
   end
@@ -25,10 +25,10 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.update_attributes(params[:line_item])
-        format.html { redirect_to(@line_item, :notice => 'Line item was successfully updated.') }
+        format.html { redirect_to(@line_item.product, :notice => 'Line item was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+          format.html { redirect_to root_path, :notice => 'An error occured while updating.' }
         format.xml  { render :xml => @line_item.errors, :status => :unprocessable_entity }
       end
     end
@@ -41,7 +41,7 @@ class LineItemsController < ApplicationController
     @line_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to(line_items_url) }
+      format.html { redirect_to(cart_path) }
       format.xml  { head :ok }
     end
   end

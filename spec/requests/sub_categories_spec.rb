@@ -15,17 +15,17 @@ describe "SubCategories" do
     end
 
     describe "success" do
-      before(:each) do
-        @category = Factory(:category)
-      end
+#      before(:each) do
+ #       @category = Factory(:category)
+  #    end
 
-      it "should create a new sub-category" #do
-#        lambda do
- #         visit new_sub_category_path
-  #        fill_in "Name", :with => 'Sub-category'
-   #       
-    #    end.should change(SubCategory, :count).by(1)
-     # end
+#      it "should create a new sub-category" do
+ #       lambda do
+  #        visit new_sub_category_path
+   #       fill_in "Name", :with => 'Sub-category'
+    #      # select category, how? 
+     #   end.should change(SubCategory, :count).by(1)
+      #end
     end
   end
 end

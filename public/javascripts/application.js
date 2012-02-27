@@ -3,7 +3,4 @@ $(document).ready(function() {
   $(".category_chosen").each(function() {
     $(this).data("placeholder", "Select category").chosen();
   });
-  $(".product_chosen").each(function() {
-    $(this).data("placeholder", "Select product").chosen();
-  });
 });
