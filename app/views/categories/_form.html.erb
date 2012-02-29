@@ -1,4 +1,4 @@
-<%= nested_form_for @category do |f| %>
+<%= nested_form_for @category, :validate => true do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this 

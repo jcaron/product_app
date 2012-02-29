@@ -46,15 +46,17 @@ describe PagesController do
     end
   end
 
-  describe "GET 'new'" do
+  describe "for signed in users" do
     before(:each) do
+      user = Factory(:user)
+      sign_in user
       get :new
     end
-
+        
     it "returns http success" do
       response.should be_success
     end
-
+        
     it "should have the right title" do
       response.should have_selector("title", :content => "Forms root")
     end

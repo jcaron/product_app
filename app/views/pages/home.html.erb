@@ -1,4 +1,8 @@
 <h1>Product Application Home</h1>
 <p>Welcome to my custom product management application.</p>
 
-<%= link_to "Get started!", new_path, :class => "start_button round" %>
+<% if signed_in? %>
+  <%= link_to "Get started!", new_path, :class => "start_button round" %>
+<% else %>
+  <%= link_to "Sign Up", new_user_registration_path, :class => "start_button round" %>
+<% end %>

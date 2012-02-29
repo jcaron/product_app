@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "SubCategories" do
+  before(:each) do
+    integration_test_sign_in
+  end
+
   describe "New" do
     describe "failure" do
       it 'should not make a new sub-category' do

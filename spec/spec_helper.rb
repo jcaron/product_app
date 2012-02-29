@@ -9,6 +9,8 @@ require 'rspec/autorun'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  include Devise::TestHelpers
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -32,7 +34,13 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, :type => :controller
 
-  def test_sign_in(user)
-    controller.sign_in(user)
+  def integration_test_sign_in
+    user = User.new(:email => 'josh@tubedepot.com', :password => 'foobar',
+                    :password_confirmation => 'foobar')
+    visit new_user_session_path
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with => user.password
+    user.save
+    click_button
   end
 end

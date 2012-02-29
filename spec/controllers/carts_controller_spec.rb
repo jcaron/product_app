@@ -20,11 +20,11 @@ describe CartsController do
   describe "for signed-in users" do
     before(:each) do
       @user = Factory(:user)
-      test_sign_in(@user)
+      sign_in @user
+      get 'show'
     end
 
     it 'should assign a cart to a user who has none' do
-      get 'show'
       @user.cart.should_not be_nil
     end
 

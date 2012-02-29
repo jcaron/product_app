@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "LayoutLinks" do
+  before(:each) do
+    integration_test_sign_in
+  end
+
   it 'should have a Home page' do
     get '/'
     response.should have_selector('title', :content => 'Home')

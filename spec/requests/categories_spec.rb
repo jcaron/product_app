@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe "Categories" do
+
+  before(:each) do
+    integration_test_sign_in
+  end
+
   it "should have a category index" do
     get categories_path
     response.status.should be(200)

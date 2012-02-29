@@ -1,4 +1,4 @@
-<%= form_for(@sub_category) do |f| %>
+<%= form_for @sub_category, :validate => true do |f| %>
   <% if @sub_category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sub_category.errors.count, "error") %> prohibited this sub_category from being saved:</h2>

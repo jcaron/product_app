@@ -27,22 +27,6 @@ class Cart < ActiveRecord::Base
     answer
   end
 
-=begin
-  def current_cart
-    if user_signed_in?
-      user = current_user
-      if user.cart.nil?
-        user.cart.create()
-        user.save
-      end
-      @current_cart = user.cart
-    else
-      session[:cart_id] ||= Cart.create!.id
-    end
-    @current_cart ||= Cart.find_or_create_by_id(session[:cart_id])
-  end
-=end
-
   private
     def check_items
       line_items.each do |item|

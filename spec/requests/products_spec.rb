@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "Products" do
+  before(:each) do
+    integration_test_sign_in
+  end
+
   it "should have a products index" do
     get products_path
     response.status.should be(200)

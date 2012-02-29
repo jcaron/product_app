@@ -5,6 +5,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'jquery-rails'
 gem 'nested_form'
 gem 'devise'
+gem 'client_side_validations', '3.0.1'
 
 group :development do
 	gem 'rspec-rails'

@@ -1,4 +1,6 @@
 class SubCategoriesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show]
+
   # GET /sub_categories
   # GET /sub_categories.xml
   def index
